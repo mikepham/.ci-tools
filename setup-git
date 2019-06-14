@@ -6,13 +6,6 @@ EMAIL=$3
 
 NAME=$(echo ${EMAIL} | grep -oP '[^[:blank:]]+(?=@)')
 
-echo $BRANCH
-echo $ORIGIN
-echo $EMAIL
-echo $NAME
-
-exit
-
 git config --global user.email ${EMAIL}
 git config --global user.name ${NAME}
 
