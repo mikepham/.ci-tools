@@ -2,9 +2,19 @@
 
 BRANCH=$1
 ORIGIN=$2
+EMAIL=$3
 
-git config --global user.email "automaton@nativecode.com"
-git config --global user.name "automaton"
+NAME=$(echo ${EMAIL} | grep -oP '[^[:blank:]]+(?=@)')
+
+echo $BRANCH
+echo $ORIGIN
+echo $EMAIL
+echo $NAME
+
+exit
+
+git config --global user.email ${EMAIL}
+git config --global user.name ${NAME}
 
 git remote set-url origin ${ORIGIN}
 git checkout ${BRANCH}

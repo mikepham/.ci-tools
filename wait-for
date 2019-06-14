@@ -2,11 +2,18 @@
 
 HOST=$1
 PORT=$2
+MODE=${3:-"HTTP"}
 
-echo "Waiting for ${HOST}:${PORT} to be available..."
+echo "Waiting for ${HOST}:${PORT} over ${MODE} to be available..."
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${HOST}:${PORT})" != "200" ]]; do
-  sleep 5
-done
+if [ ${MODE} = "TCP" ]; then
+  while ! nc -z ${HOST} ${PORT}; do
+    sleep 0.5
+  done
+else
+  while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' ${HOST}:${PORT})" != "200" ]]; do
+    sleep 0.5
+  done
+fi
 
 echo "Found ${HOST}:${PORT}"
