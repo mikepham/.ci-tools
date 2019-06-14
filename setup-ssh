@@ -5,8 +5,8 @@ FILENAME=$2
 
 if [ -f ${FILENAME} ]; then
   PRIVATE_KEY=$(cat ${FILENAME} | base64)
-  export GIT_SSH_KEY_GITLAB "${PRIVATE_KEY}"
-  export GIT_SSH_HOST_GITLAB ${HOSTNAME}
+  export GIT_SSH_KEY_GITLAB="${PRIVATE_KEY}"
+  export GIT_SSH_HOST_GITLAB=${HOSTNAME}
 fi
 
 npx git-ssh-key setup
