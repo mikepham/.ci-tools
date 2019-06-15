@@ -16,5 +16,3 @@ if [ "${ORIGIN}" != "none" ]; then
 fi
 
 git checkout ${BRANCH}
-git submodule sync --recursive
-git submodule update --init --recursive
