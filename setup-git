@@ -11,5 +11,6 @@ git config --global user.name ${NAME}
 
 if [ "${ORIGIN}" != "none" ]; then
     git remote set-url origin ${ORIGIN}
-    git checkout ${BRANCH}
 fi
+
+git checkout ${BRANCH}
