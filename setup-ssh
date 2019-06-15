@@ -11,8 +11,8 @@ if [ -f ${FILENAME} ]; then
   export GIT_SSH_HOST_GITLAB=${HOSTNAME}
 fi
 
-npm install -g git-ssh-key
-git-ssh-key setup
+# npm install -g git-ssh-key
+# git-ssh-key setup
 
 SSH_FILENAME="$(echo ${HOSTNAME} | tr . _)_key"
 echo "$(echo "${GIT_SSH_KEY_GITLAB}" | base64 --decode)" > ~/.ssh/id_rsa
