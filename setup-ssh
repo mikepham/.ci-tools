@@ -11,5 +11,6 @@ if [ -f ${FILENAME} ]; then
   export GIT_SSH_HOST_GITLAB=${HOSTNAME}
 fi
 
-npx git-ssh-key setup
+npm install -g git-ssh-key
+git-ssh-key setup
 ssh-keyscan ${HOSTNAME} >> ~/.ssh/known_hosts
