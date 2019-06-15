@@ -14,6 +14,18 @@ fi
 # npm install -g git-ssh-key
 # git-ssh-key setup
 
+if [ ! -d ~/.ssh ]; then
+  mkdir -p ~/.ssh
+fi
+
+echo <<EOF >
+Host git.nativecode.net
+  IdentitiesOnly yes
+  UserKnownHostsFile=/dev/null
+  StrictHostKeyChecking no
+  IdentityFile ~/.ssh/id_rsa
+EOF > ~/.ssh/config
+
 SSH_FILENAME="$(echo ${HOSTNAME} | tr . _)_key"
 echo "$(echo "${GIT_SSH_KEY_GITLAB}" | base64 --decode)" > ~/.ssh/id_rsa
 ssh-keyscan -H ${HOSTNAME} >> ~/.ssh/known_hosts
