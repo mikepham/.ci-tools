@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BRANCH=$1
-ORIGIN=$2
+ORIGIN=${2:-"none"}
 EMAIL=$3
 
 NAME=$(echo ${EMAIL} | grep -oP '[^[:blank:]]+(?=@)')
@@ -9,5 +9,7 @@ NAME=$(echo ${EMAIL} | grep -oP '[^[:blank:]]+(?=@)')
 git config --global user.email ${EMAIL}
 git config --global user.name ${NAME}
 
-git remote set-url origin ${ORIGIN}
-git checkout ${BRANCH}
+if [ "${ORIGIN}" != "none" ]; then
+    git remote set-url origin ${ORIGIN}
+    git checkout ${BRANCH}
+fi
