@@ -15,7 +15,7 @@ npm install -g git-ssh-key
 git-ssh-key setup
 SSH_FILENAME="$(echo ${HOSTNAME} | tr . _)_key"
 echo ${GIT_SSH_KEY_GITLAB}
-DECODED=$(echo ${GIT_SSH_KEY_GITLAB} | base64 --decode)
+DECODED=$(echo "${GIT_SSH_KEY_GITLAB}" | base64 --decode)
 echo ${DECODED}
 echo ${DECODED} > ~/.ssh/git_ssh_keys/${SSH_FILENAME}
 ssh-keyscan ${HOSTNAME} >> ~/.ssh/known_hosts
