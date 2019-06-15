@@ -1,10 +1,10 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 BRANCH=$1
 ORIGIN=${2:-"none"}
-EMAIL=$3
+EMAIL=${3:-"noreply@nativecode.com"}
 
 NAME=$(echo ${EMAIL} | grep -oP '[^[:blank:]]+(?=@)')
 
