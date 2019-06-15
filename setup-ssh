@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 HOSTNAME=$1
 FILENAME=$2
@@ -13,9 +13,8 @@ fi
 
 npm install -g git-ssh-key
 git-ssh-key setup
+
 SSH_FILENAME="$(echo ${HOSTNAME} | tr . _)_key"
-echo ${GIT_SSH_KEY_GITLAB}
-DECODED=$(echo "${GIT_SSH_KEY_GITLAB}" | base64 --decode)
-echo ${DECODED}
-echo ${DECODED} > ~/.ssh/git_ssh_keys/${SSH_FILENAME}
+$(echo "${GIT_SSH_KEY_GITLAB}" | base64 --decode) > ~/.ssh/git_ssh_keys/${SSH_FILENAME}
+cat ~/.ssh/git_ssh_keys/${SSH_FILENAME}
 ssh-keyscan ${HOSTNAME} >> ~/.ssh/known_hosts
