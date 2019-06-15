@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 HOSTNAME=$1
 FILENAME=$2
