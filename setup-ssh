@@ -6,6 +6,10 @@ HOSTNAME=$1
 FILENAME=$2
 
 if [ -f ${FILENAME} ]; then
+  if [ ! -d ~/.ssh ]; then
+    mkdir -p ~/.ssh
+  fi
+
   eval $(ssh-agent -s)
   ssh-add <(cat ${FILENAME})
 
