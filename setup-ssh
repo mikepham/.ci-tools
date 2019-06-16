@@ -17,10 +17,11 @@ fi
 
 cat <<EOF >~/.ssh/config
 Host git.nativecode.net
+  HostName gitssh.nativecode.net
   IdentitiesOnly yes
-  UserKnownHostsFile=/dev/null
-  StrictHostKeyChecking no
   IdentityFile ~/.ssh/id_rsa
+  PreferredAuthentications publickey
+  StrictHostKeyChecking no
+  User git
+  UserKnownHostsFile=/dev/null
 EOF
-
-ssh-keyscan -H ${HOSTNAME} >>~/.ssh/known_hosts
