@@ -5,23 +5,18 @@ set -e
 HOSTNAME=$1
 FILENAME=$2
 
-if [ ! -d ~/.ssh ]; then
-  mkdir -p ~/.ssh
-  chmod 700 ~/.ssh
-fi
-
 if [ -f ${FILENAME} ]; then
-  cat ${FILENAME} >~/.ssh/id_rsa
-  chmod 600 ~/.ssh/id_rsa
-fi
+  ssh-add <(cat ${FILENAME})
 
-cat <<EOF >~/.ssh/config
-Host git.nativecode.net
-  HostName gitssh.nativecode.net
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/id_rsa
-  PreferredAuthentications publickey
-  StrictHostKeyChecking no
-  User git
-  UserKnownHostsFile=/dev/null
+  cat <<EOF >~/.ssh/config
+  Host git.nativecode.net
+    HostName gitssh.nativecode.net
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/id_rsa
+    PreferredAuthentications publickey
+    StrictHostKeyChecking no
+    User git
+    UserKnownHostsFile=/dev/null
 EOF
+
+fi
