@@ -26,6 +26,4 @@ if [ -f ${FILENAME} ]; then
     UserKnownHostsFile=/dev/null
 EOF
 
-  ssh-keyscan -H ${HOSTNAME} >>~/.ssh/known_hosts
-
 fi
