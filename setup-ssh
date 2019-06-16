@@ -4,6 +4,7 @@ set -e
 
 HOSTNAME=$1
 FILENAME=$2
+SSH_HOST=${3:-$HOSTNAME}
 
 if [ -f ${FILENAME} ]; then
   if [ ! -d ~/.ssh ]; then
@@ -17,8 +18,8 @@ if [ -f ${FILENAME} ]; then
   ssh-add <(cat ~/.ssh/${KEYNAME})
 
   cat <<EOF >~/.ssh/config
-  Host git.nativecode.net
-    HostName gitssh.nativecode.net
+  Host $HOSTNAME
+    HostName $SSH_HOST
     IdentitiesOnly yes
     IdentityFile ~/.ssh/$KEYNAME
     PreferredAuthentications publickey
@@ -27,4 +28,7 @@ if [ -f ${FILENAME} ]; then
     UserKnownHostsFile=/dev/null
 EOF
 
+  exit
 fi
+
+npx git-ssh-key setup
