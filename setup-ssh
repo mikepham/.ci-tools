@@ -5,15 +5,14 @@ set -e
 HOSTNAME=$1
 FILENAME=$2
 
-if [ -f ${FILENAME} ]; then
-  PRIVATE_KEY=$(cat ${FILENAME} | base64)
-  cat ${FILENAME} >>~/.ssh/id_rsa
-  export GIT_SSH_KEY_GITLAB="${PRIVATE_KEY}"
-  export GIT_SSH_HOST_GITLAB=${HOSTNAME}
-fi
-
 if [ ! -d ~/.ssh ]; then
   mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+fi
+
+if [ -f ${FILENAME} ]; then
+  cat ${FILENAME} >~/.ssh/id_rsa
+  chmod 600 ~/.ssh/id_rsa
 fi
 
 cat <<EOF >~/.ssh/config
