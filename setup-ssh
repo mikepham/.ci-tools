@@ -13,6 +13,7 @@ if [ -f ${FILENAME} ]; then
   eval $(ssh-agent -s)
   KEYNAME=$(echo $HOSTNAME | tr . -)
   cat ${FILENAME} >~/.ssh/${KEYNAME}
+  chmod 600 ~/.ssh/${KEYNAME}
   ssh-add <(cat ~/.ssh/${KEYNAME})
 
   cat <<EOF >~/.ssh/config
