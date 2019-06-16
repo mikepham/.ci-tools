@@ -6,6 +6,7 @@ HOSTNAME=$1
 FILENAME=$2
 
 if [ -f ${FILENAME} ]; then
+  eval $(ssh-agent -s)
   ssh-add <(cat ${FILENAME})
 
   cat <<EOF >~/.ssh/config
