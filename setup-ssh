@@ -11,19 +11,21 @@ if [ -f ${FILENAME} ]; then
   fi
 
   eval $(ssh-agent -s)
-  ssh-add <(cat ${FILENAME})
+  KEYNAME=$(echo $HOSTNAME | tr . -)
+  cat ${FILENAME} >~/.ssh/${KEYNAME}
+  ssh-add <(cat ~/.ssh/${KEYNAME})
 
   cat <<EOF >~/.ssh/config
   Host git.nativecode.net
     HostName gitssh.nativecode.net
     IdentitiesOnly yes
-    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/$KEYNAME
     PreferredAuthentications publickey
     StrictHostKeyChecking no
     User git
     UserKnownHostsFile=/dev/null
 EOF
 
-  ssh-keyscan -H ${HOSTNAME} >> ~/.ssh/known_hosts
+  ssh-keyscan -H ${HOSTNAME} >>~/.ssh/known_hosts
 
 fi
