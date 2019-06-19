@@ -11,9 +11,11 @@ case ${MODE} in
     ;;
 "prerelease")
     ${LERNA} version prerelease --dist-tag next --preid next --no-changelog
+    ${LERNA} publish from-git --dist-tag next
     ;;
 "release")
     ${LERNA} version --conventional-graduate
+    ${LERNA} publish from-git --create-release gitlab
     ;;
 "tag-prerelease")
     ${LERNA} publish from-git --dist-tag next
@@ -21,5 +23,4 @@ case ${MODE} in
 "tag-release")
     ${LERNA} publish from-git --create-release gitlab
     ;;
-
 esac
