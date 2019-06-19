@@ -7,7 +7,7 @@ LERNA="npx lerna"
 
 case ${MODE} in
 "canary")
-    ${LERNA} publish --canary --preid canary --no-changelog
+    ${LERNA} publish --canary --preid canary --dist-tag canary --no-changelog
     ;;
 "prerelease")
     ${LERNA} version prerelease --dist-tag next --preid next --no-changelog
