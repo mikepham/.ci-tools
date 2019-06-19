@@ -3,26 +3,23 @@
 set -ex
 
 MODE=${1:-"$MODE"}
-LERNA=$(which lerna)
-
-${LERNA} changed
-
-if [ $? -neq 0 ]; then
-    echo "No lerna changes detected."
-    exit
-fi
+LERNA="npx lerna"
 
 case ${MODE} in
 "canary")
-    ${LERNA} version prerelease --dist-tag canary --preid canary --no-changelog
     ${LERNA} publish --canary --preid canary --no-changelog
-    ;;
-"release")
-    ${LERNA} version --conventional-graduate
-    ${LERNA} publish from-git --create-release gitlab
     ;;
 "prerelease")
     ${LERNA} version prerelease --dist-tag next --preid next --no-changelog
+    ;;
+"release")
+    ${LERNA} version --conventional-graduate
+    ;;
+"tag-prerelease")
     ${LERNA} publish from-git --dist-tag next
     ;;
+"tag-release")
+    ${LERNA} publish from-git --create-release gitlab
+    ;;
+
 esac
