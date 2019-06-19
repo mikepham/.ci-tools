@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 MODE=${1:-"$MODE"}
 LERNA=$(which lerna)
