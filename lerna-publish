@@ -3,7 +3,7 @@
 set -ex
 
 MODE=${1:-"$MODE"}
-LERNA="npx lerna"
+LERNA=$(which lerna)
 
 case ${MODE} in
 "canary")
@@ -15,12 +15,6 @@ case ${MODE} in
     ;;
 "release")
     ${LERNA} version --conventional-graduate
-    ${LERNA} publish from-git --create-release gitlab
-    ;;
-"tag-prerelease")
-    ${LERNA} publish from-git --dist-tag next
-    ;;
-"tag-release")
     ${LERNA} publish from-git --create-release gitlab
     ;;
 esac
