@@ -9,6 +9,11 @@ ${LERNA} changed
 
 case ${MODE} in
 "canary")
+    if [ "$($LERNA changed)" = "" ]; then
+        echo "No changes from commits, skipping publish"
+        exit
+    fi
+    ${LERNA} version prerelease --dist-tag canary --preid canary --no-changelog
     ${LERNA} publish --canary --preid canary --no-changelog
     ;;
 "release")
@@ -25,6 +30,6 @@ case ${MODE} in
         exit
     fi
     ${LERNA} version prerelease --dist-tag next --preid next --no-changelog
-    ${LERNA} publish  from-git --dist-tag next
+    ${LERNA} publish from-git --dist-tag next
     ;;
 esac
