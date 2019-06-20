@@ -10,11 +10,9 @@ case ${MODE} in
     ${LERNA} publish --canary --preid canary --dist-tag canary --no-changelog --conventional-commits
     ;;
 "prerelease")
-    # ${LERNA} version prerelease --dist-tag next --preid next --no-changelog --conventional-commits
     ${LERNA} publish --conventional-commits --dist-tag next --preid next
     ;;
 "release")
-    # ${LERNA} version --conventional-graduate --conventional-commits
-    ${LERNA} publish --conventional-commits --create-release gitlab
+    ${LERNA} publish --conventional-commits --conventional-graduate --create-release gitlab
     ;;
 esac
