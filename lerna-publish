@@ -7,7 +7,7 @@ LERNA=$(which lerna)
 
 case ${MODE} in
 "canary")
-    ${LERNA} publish --canary --preid canary --dist-tag canary --no-changelog --conventional-commits
+    ${LERNA} publish --canary --conventional-commits --preid canary --dist-tag canary --no-changelog
     ;;
 "prerelease")
     ${LERNA} publish --conventional-commits --dist-tag next --preid next
