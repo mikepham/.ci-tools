@@ -7,14 +7,14 @@ LERNA=$(which lerna)
 
 case ${MODE} in
 "canary")
-    ${LERNA} publish --canary --preid canary --dist-tag canary --no-changelog
+    ${LERNA} publish --canary --preid canary --dist-tag canary --no-changelog --conventional-commits
     ;;
 "prerelease")
-    ${LERNA} version prerelease --dist-tag next --preid next --no-changelog
-    ${LERNA} publish from-git --dist-tag next
+    ${LERNA} version prerelease --dist-tag next --preid next --no-changelog --conventional-commits
+    ${LERNA} publish from-git --dist-tag next --conventional-commits
     ;;
 "release")
-    ${LERNA} version --conventional-graduate
-    ${LERNA} publish from-git --create-release gitlab
+    ${LERNA} version --conventional-graduate --conventional-commits
+    ${LERNA} publish from-git --create-release gitlab --conventional-commits
     ;;
 esac
