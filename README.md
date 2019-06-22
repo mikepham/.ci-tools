@@ -9,7 +9,7 @@ setup-git <BRANCH> <ORIGIN> <EMAIL>
 ## setup-ssh
 Configures the remote build agent with a pre-defined SSH key from an environment variable or filename.
 ```
-setup-ssh <DOMAIN> [FILEPATH]
+setup-ssh <DOMAIN> [FILEPATH] [SSH_HOST]
 ```
 
 ## wait-for
