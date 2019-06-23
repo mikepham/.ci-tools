@@ -1,0 +1,40 @@
+#!/bin/bash
+
+PROJECT_TYPE=${1:-"none"}
+WORK_DIR=${2:-${PWD}}
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+TEMPLATES=${SCRIPT_DIR}/templates
+
+copy_files() {
+  local FILES=$(ls -a $1)
+  local REPLACE=${2:-false}
+
+  for FILENAME in ${FILES}; do
+    local SOURCE="${1}/${FILENAME}"
+    local TARGET="${WORK_DIR}/${FILENAME}"
+
+    if [[ ${FILENAME} == "." || ${FILENAME} == ".." ]]; then
+      continue
+    fi
+
+    if [[ ! -f ${FILENAME} || ${REPLACE} ]]; then
+      echo "COPY: ${TARGET}"
+      cp ${SOURCE} ${TARGET}
+    fi
+  done
+}
+
+case ${PROJECT_TYPE} in
+"npm")
+  copy_files "${TEMPLATES}/include/npm-project"
+  copy_files "${TEMPLATES}/replace/git" true
+  ;;
+
+*)
+  echo "init <project_type>"
+  echo ""
+  echo "  npm"
+  echo ""
+  ;;
+esac
